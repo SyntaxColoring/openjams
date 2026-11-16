@@ -21,25 +21,38 @@ export default function Home() {
             Build Next.js-style apps with Vite and deploy them to the edge.
           </h1>
           <p className="max-w-2xl text-lg leading-8 text-slate-700">
-            This App Router project is wired for vinext, Tailwind CSS, and Cloudflare Workers.
+            This App Router project is wired for vinext, Tailwind CSS, and
+            Cloudflare Workers.
           </p>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-3">
           <div className="rounded-lg border border-slate-200 bg-white p-5">
             <h2 className="font-semibold">Develop</h2>
-            <p className="mt-2 text-sm leading-6 text-slate-600">Run the vinext dev server locally.</p>
-            <code className="mt-4 block rounded bg-slate-100 px-3 py-2 text-sm">pnpm run dev</code>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Run the vinext dev server locally.
+            </p>
+            <code className="mt-4 block rounded bg-slate-100 px-3 py-2 text-sm">
+              pnpm run dev
+            </code>
           </div>
           <div className="rounded-lg border border-slate-200 bg-white p-5">
             <h2 className="font-semibold">Build</h2>
-            <p className="mt-2 text-sm leading-6 text-slate-600">Create Worker-ready production output.</p>
-            <code className="mt-4 block rounded bg-slate-100 px-3 py-2 text-sm">pnpm run build</code>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Create Worker-ready production output.
+            </p>
+            <code className="mt-4 block rounded bg-slate-100 px-3 py-2 text-sm">
+              pnpm run build
+            </code>
           </div>
           <div className="rounded-lg border border-slate-200 bg-white p-5">
             <h2 className="font-semibold">Deploy</h2>
-            <p className="mt-2 text-sm leading-6 text-slate-600">Ship the generated Worker with cf.</p>
-            <code className="mt-4 block rounded bg-slate-100 px-3 py-2 text-sm">pnpm run deploy</code>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Ship the generated Worker with cf.
+            </p>
+            <code className="mt-4 block rounded bg-slate-100 px-3 py-2 text-sm">
+              pnpm run deploy
+            </code>
           </div>
         </div>
 
