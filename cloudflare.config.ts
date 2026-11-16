@@ -5,7 +5,7 @@ export default defineConfig({
     name: "local-jams",
     entrypoint: "vinext/server/fetch-handler",
     compatibilityDate: "2026-11-15",
-    compatibilityFlags: ["nodejs_compat"],
+    compatibilityFlags: ["nodejs_compat", "temporal"],
     assets: {
       htmlHandling: "none",
       notFoundHandling: "none",
