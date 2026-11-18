@@ -5,6 +5,7 @@
   "packageManager": "npm@11.20.0",
   "dependencies": {
     "@vinext/cloudflare": "latest",
+    "@vis.gl/react-google-maps": "^1.10.2",
     "node-ical": "^0.27.6",
     "react": "latest",
     "react-dom": "latest",

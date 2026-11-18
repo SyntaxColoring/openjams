@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { EventInstance, fetchEvents } from "./lib/calendar";
 import { geosearch } from "./lib/geosearch";
 
+import { Map } from "./components/map";
+
 import "./global.css";
 
 // TODO: This should be taken from the calendar, or configurable.
@@ -55,6 +57,19 @@ export default async function Home() {
           <p>{eventInstance.description}</p>
         </>
       ))}
+      <Map
+        pins={geosearchedEventInstances.flatMap(({ title, geosearchResult }) =>
+          geosearchResult
+            ? [
+                {
+                  id: title, // TODO: Make sure this is unique.
+                  latitude: geosearchResult.latitude,
+                  longitude: geosearchResult.longitude,
+                },
+              ]
+            : [],
+        )}
+      />
     </>
   );
 }
