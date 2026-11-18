@@ -74,8 +74,6 @@ export default async function Home() {
   );
 }
 
-// function groupEventsForDisplay(events: Event[]):
-
 function timeString(eventInstance: EventInstance): string {
   const format = Intl.DateTimeFormat(LOCALE, {
     timeZone: TIMEZONE,
