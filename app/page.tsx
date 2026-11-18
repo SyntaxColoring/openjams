@@ -3,6 +3,7 @@ import { EventInstance, fetchEvents } from "./lib/calendar";
 import { geosearch } from "./lib/geosearch";
 
 import { Map } from "./components/map";
+import { RichTextDescription } from "./components/rich-text-description";
 
 import "./global.css";
 
@@ -50,11 +51,7 @@ export default async function Home() {
               </a>
             </p>
           )}
-          {/*TODO: Render formatting in description.
-            Google Calendar turns line breaks into <br> (which we should turn into <p>),
-            turns links into <a href="..."> even when the text is identical to the URL,
-            turns italics into <i>, etc.*/}
-          <p>{eventInstance.description}</p>
+          <RichTextDescription unsafeHTML={eventInstance.description} />
         </>
       ))}
       <Map

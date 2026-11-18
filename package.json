@@ -10,6 +10,7 @@
     "react": "latest",
     "react-dom": "latest",
     "react-server-dom-webpack": "latest",
+    "sanitize-html": "^2.18.2",
     "vinext": "latest",
     "zod": "^4.6.7"
   },
@@ -19,6 +20,7 @@
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "@types/sanitize-html": "^2.16.2",
     "@vitejs/plugin-react": "latest",
     "@vitejs/plugin-rsc": "latest",
     "cf": "^1.0.0-beta.32",
