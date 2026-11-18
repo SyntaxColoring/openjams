@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { EventInstance, fetchEvents } from "./lib/calendar";
 import { geosearch } from "./lib/geosearch";
 
+import "./global.css";
+
 // TODO: This should be taken from the calendar, or configurable.
 const LOCALE = "en-US";
 const TIMEZONE = "America/New_York";
