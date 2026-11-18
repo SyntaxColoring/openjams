@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { EventInstance, fetchEvents } from "./lib/calendar";
+import { geosearch } from "./lib/geosearch";
 
 // TODO: This should be taken from the calendar, or configurable.
 const LOCALE = "en-US";
@@ -17,14 +18,27 @@ export default async function Home() {
   const eventInstances = events
     .flatMap((event) => event.instances.at(0) ?? [])
     .toSorted((a, b) => Temporal.Instant.compare(a.start, b.start));
+  // TODO: Rate limit, and tolerate rejected.
+  const geosearchedEventInstances = await Promise.all(
+    eventInstances.map(async (eventInstance) => {
+      const geosearchResult = eventInstance.location
+        ? await geosearch(eventInstance.location)
+        : null;
+      return { geosearchResult, ...eventInstance };
+    }),
+  );
+
   // TODO: Somehow show "weekly", "monthly," etc.
   return (
     <>
       <h1>NYC Open Jams</h1>
-      {eventInstances.map((eventInstance) => (
+      {geosearchedEventInstances.map((eventInstance) => (
         <>
           <h2>{eventInstance.title}</h2>
           <p>{timeString(eventInstance)}</p>
+          {eventInstance.geosearchResult && (
+            <p>{eventInstance.geosearchResult.neighborhood}</p>
+          )}
           {eventInstance.location && (
             <p>
               <a href={googleMapsURL(eventInstance.location)}>
