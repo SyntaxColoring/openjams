@@ -7,7 +7,7 @@ const Feature = z.object({
     coordinates: z.tuple([z.number(), z.number()]),
   }),
   properties: z.object({
-    neighborhood: z.string(),
+    neighbourhood: z.string(),
   }),
 });
 
@@ -49,6 +49,6 @@ export async function geosearch(
   return {
     longitude: match.geometry.coordinates[0],
     latitude: match.geometry.coordinates[1],
-    neighborhood: match.properties.neighborhood,
+    neighborhood: match.properties.neighbourhood,
   };
 }
