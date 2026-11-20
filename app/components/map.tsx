@@ -59,7 +59,7 @@ function TransitLayer() {
   const map = useMap();
   const mapsLib = useMapsLibrary("maps");
   useLayoutEffect(() => {
-    if (map) {
+    if (map && mapsLib) {
       const transitLayer = new mapsLib.TransitLayer();
       transitLayer.setMap(map);
       return () => {
