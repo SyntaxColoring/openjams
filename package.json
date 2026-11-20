@@ -36,6 +36,8 @@
     "deploy": "vinext-cloudflare deploy",
     "preview": "npm run build && npm run start --",
     "cf-typegen": "cf workers types",
+    "check": "npm run check-types && npm run check-format",
+    "check-types": "tsc --noEmit",
     "check-format": "prettier . --check",
     "fix-format": "prettier . --write"
   }
