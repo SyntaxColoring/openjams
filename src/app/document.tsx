@@ -10,6 +10,7 @@ export function Document({ children }: { children: React.ReactNode }) {
         <link rel="stylesheet" href={stylesURL} />
         <link rel="modulepreload" href="/src/client.tsx" />
         <script
+          // eslint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml -- Trusted and static.
           dangerouslySetInnerHTML={{
             __html: `
               window.goatcounter = {

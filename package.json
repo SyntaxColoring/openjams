@@ -11,7 +11,7 @@
     "deploy": "npm run build && wrangler deploy",
     "generate-types": "wrangler types --include-runtime false && prettier --write worker-configuration.d.ts",
     "check": "npm run check-types && npm run check-lint && npm run check-format",
-    "check-lint": "eslint",
+    "check-lint": "eslint --max-warnings 0",
     "check-types": "tsc",
     "check-format": "prettier . --check",
     "fix-format": "prettier . --write"

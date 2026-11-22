@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+
 import { EventInstance, fetchEvents } from "../lib/calendar";
 import { geosearch } from "../lib/geosearch";
 
@@ -30,8 +32,9 @@ export async function Home() {
   return (
     <>
       <h1>NYC Open Jams</h1>
-      {geosearchedEventInstances.map((eventInstance) => (
-        <>
+      {geosearchedEventInstances.map((eventInstance, index) => (
+        // eslint-disable-next-line @eslint-react/no-array-index-key
+        <Fragment key={index}>
           <h2>{eventInstance.title}</h2>
           <p>{timeString(eventInstance)}</p>
           {eventInstance.geosearchResult && (
@@ -45,7 +48,7 @@ export async function Home() {
             </p>
           )}
           <RichTextDescription unsafeHTML={eventInstance.description} />
-        </>
+        </Fragment>
       ))}
       <Map
         pins={geosearchedEventInstances.flatMap(({ title, geosearchResult }) =>

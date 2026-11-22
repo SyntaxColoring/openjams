@@ -11,5 +11,6 @@ export function RichTextDescription(props: { unsafeHTML: string }): ReactNode {
   // <ul>/<ol>/<li>
   // <br> instead of <p>, unfortunately
   const sanitizedHTML = sanitizeHtml(unsafeHTML);
+  // eslint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml -- Sanitized above.
   return <div dangerouslySetInnerHTML={{ __html: sanitizedHTML }} />;
 }
