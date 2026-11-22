@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 
-import { EventInstance, fetchEvents } from "../lib/calendar";
-import { geosearch } from "../lib/geosearch";
+import { EventOccurrence } from "../lib/calendar";
+import { getEventData } from "../lib/events";
 
 import { Map } from "../components/map";
 import { RichTextDescription } from "../components/rich-text-description";
@@ -11,63 +11,51 @@ const LOCALE = "en-US";
 const TIMEZONE = "America/New_York";
 
 export async function Home() {
-  // TODO: Does this require Temporal support on the client?
-  console.log("Fetching");
-  const events = await fetchEvents(Temporal.Now.instant());
-  console.log("Done fetching. Got events: ", events);
-  const eventInstances = events
-    .flatMap((event) => event.instances.at(0) ?? [])
-    .toSorted((a, b) => Temporal.Instant.compare(a.start, b.start));
-  // TODO: Rate limit, and tolerate rejected.
-  const geosearchedEventInstances = await Promise.all(
-    eventInstances.map(async (eventInstance) => {
-      const geosearchResult = eventInstance.location
-        ? await geosearch(eventInstance.location)
-        : null;
-      return { geosearchResult, ...eventInstance };
-    }),
-  );
+  const events = await getEventData(Temporal.Now.instant());
 
   // TODO: Somehow show "weekly", "monthly," etc.
   return (
     <>
       <h1>NYC Open Jams</h1>
-      {geosearchedEventInstances.map((eventInstance, index) => (
-        // eslint-disable-next-line @eslint-react/no-array-index-key
-        <Fragment key={index}>
-          <h2>{eventInstance.title}</h2>
-          <p>{timeString(eventInstance)}</p>
-          {eventInstance.geosearchResult && (
-            <p>{eventInstance.geosearchResult.neighborhood}</p>
-          )}
-          {eventInstance.location && (
-            <p>
-              <a href={googleMapsURL(eventInstance.location)}>
-                {displayAddress(eventInstance.location)}
-              </a>
-            </p>
-          )}
-          <RichTextDescription unsafeHTML={eventInstance.description} />
-        </Fragment>
-      ))}
+      {events.map((event) => {
+        const nextOccurrence = event.occurrences[0];
+        return (
+          <Fragment key={event.id}>
+            <h2>{nextOccurrence.title}</h2>
+            <p>{timeString(nextOccurrence)}</p>
+            {nextOccurrence.geosearchResult && (
+              <p>{nextOccurrence.geosearchResult.neighborhood}</p>
+            )}
+            {nextOccurrence.location && (
+              <p>
+                <a href={googleMapsURL(nextOccurrence.location)}>
+                  {displayAddress(nextOccurrence.location)}
+                </a>
+              </p>
+            )}
+            <RichTextDescription unsafeHTML={nextOccurrence.description} />
+          </Fragment>
+        );
+      })}
       <Map
-        pins={geosearchedEventInstances.flatMap(({ title, geosearchResult }) =>
-          geosearchResult
-            ? [
-                {
-                  id: title, // TODO: Make sure this is unique.
-                  latitude: geosearchResult.latitude,
-                  longitude: geosearchResult.longitude,
-                },
-              ]
-            : [],
-        )}
+        pins={events
+          .map((event) => {
+            const nextOccurrence = event.occurrences[0];
+            return nextOccurrence.geosearchResult
+              ? {
+                  id: event.id,
+                  latitude: nextOccurrence.geosearchResult.latitude,
+                  longitude: nextOccurrence.geosearchResult.longitude,
+                }
+              : null;
+          })
+          .filter((pin) => pin != null)}
       />
     </>
   );
 }
 
-function timeString(eventInstance: EventInstance): string {
+function timeString(eventInstance: EventOccurrence): string {
   const format = Intl.DateTimeFormat(LOCALE, {
     timeZone: TIMEZONE,
     weekday: "short",
