@@ -1,6 +1,6 @@
 {
-  "name": "local-jams",
-  "version": "0.1.0",
+  "name": "openjams",
+  "version": "0",
   "private": true,
   "packageManager": "npm@11.20.0",
   "type": "module",
