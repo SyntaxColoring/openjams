@@ -1,21 +1,14 @@
-import type { Metadata } from "next";
-import { EventInstance, fetchEvents } from "./lib/calendar";
-import { geosearch } from "./lib/geosearch";
+import { EventInstance, fetchEvents } from "../lib/calendar";
+import { geosearch } from "../lib/geosearch";
 
-import { Map } from "./components/map";
-import { RichTextDescription } from "./components/rich-text-description";
-
-import "./global.css";
+import { Map } from "../components/map";
+import { RichTextDescription } from "../components/rich-text-description";
 
 // TODO: This should be taken from the calendar, or configurable.
 const LOCALE = "en-US";
 const TIMEZONE = "America/New_York";
 
-export const metadata: Metadata = {
-  title: "NYC Open Jams",
-};
-
-export default async function Home() {
+export async function Home() {
   // TODO: Does this require Temporal support on the client?
   console.log("Fetching");
   const events = await fetchEvents(Temporal.Now.instant());

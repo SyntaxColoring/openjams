@@ -1,10 +1,12 @@
-# vinext app
+# local-jams
 
-This project was created with create-vinext-app.
+Built with [RedwoodSDK](https://docs.rwsdk.com/), deployed to Cloudflare Workers.
 
 ## Scripts
 
-- `pnpm run dev` starts the vinext dev server.
-- `pnpm run build` builds the Cloudflare Worker output.
-- `pnpm run start` previews the built Worker locally.
-- `pnpm run deploy` deploys the Cloudflare Worker.
+- `npm run dev` starts the dev server.
+- `npm run build` builds the Worker.
+- `npm run preview` previews the built Worker locally.
+- `npm run deploy` builds and deploys the Worker.
+- `npm run generate-types` regenerates `worker-configuration.d.ts` after changing `wrangler.jsonc`.
+- `npm run check` typechecks, lints, and checks formatting.
