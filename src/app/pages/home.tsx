@@ -16,12 +16,12 @@ export async function Home() {
   // TODO: Somehow show "weekly", "monthly," etc.
   return (
     <>
-      <h1>NYC Open Jams</h1>
+      <h2>Upcoming open jams</h2>
       {events.map((event) => {
         const nextOccurrence = event.occurrences[0];
         return (
           <Fragment key={event.id}>
-            <h2>{nextOccurrence.title}</h2>
+            <h3>{nextOccurrence.title}</h3>
             <p>{timeString(nextOccurrence)}</p>
             {nextOccurrence.geosearchResult && (
               <p>{nextOccurrence.geosearchResult.neighborhood}</p>

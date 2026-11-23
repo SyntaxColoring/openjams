@@ -55,8 +55,8 @@ export async function fetchEvents(
       occurrences: rawOccurrences.map((rawOccurrence) => ({
         // node-ical types summary as required,
         // but it seems like Google Calendar can omit it.
-        title: rawOccurrence.event.summary ?
-          getValue(rawOccurrence.event.summary)
+        title: rawOccurrence.event.summary
+          ? getValue(rawOccurrence.event.summary)
           : "Untitled event",
         description: rawOccurrence.event.description
           ? getValue(rawOccurrence.event.description)

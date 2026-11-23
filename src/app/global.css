@@ -1,3 +1,59 @@
+/*
+Redwood doesn't support CSS Modules, so we're stuck slumming it
+in a big ol' global.css file. :( https://github.com/redwoodjs/sdk/issues/617
+*/
+
 :root {
   font-family: "Comic Sans MS", "Comic Sans";
+  font-size: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: cornflowerblue;
+}
+a:hover {
+  color: white;
+  background-color: cornflowerblue;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.layout {
+  /* TODO: Confirm which units */
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  border-bottom: 1px solid black;
+  padding: 0.5rem;
+}
+
+.main {
+  flex: 1;
+}
+
+.calendar-embed {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.header-link {
+  margin-right: 1rem;
+}
+
+.text-container {
+  padding-inline: 0.5rem;
+  max-width: 30rem;
 }
