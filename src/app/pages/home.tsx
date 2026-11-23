@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { EventOccurrence } from "../lib/calendar";
 import { getEventData } from "../lib/events";
 
-import { Map } from "../components/map";
+import { PinMap } from "../components/map";
 import { RichTextDescription } from "../components/rich-text-description";
 
 // TODO: This should be taken from the calendar, or configurable.
@@ -15,29 +15,9 @@ export async function Home() {
 
   // TODO: Somehow show "weekly", "monthly," etc.
   return (
-    <>
-      <h2>Upcoming open jams</h2>
-      {events.map((event) => {
-        const nextOccurrence = event.occurrences[0];
-        return (
-          <Fragment key={event.id}>
-            <h3>{nextOccurrence.title}</h3>
-            <p>{timeString(nextOccurrence)}</p>
-            {nextOccurrence.geosearchResult && (
-              <p>{nextOccurrence.geosearchResult.neighborhood}</p>
-            )}
-            {nextOccurrence.location && (
-              <p>
-                <a href={googleMapsURL(nextOccurrence.location)}>
-                  {displayAddress(nextOccurrence.location)}
-                </a>
-              </p>
-            )}
-            <RichTextDescription unsafeHTML={nextOccurrence.description} />
-          </Fragment>
-        );
-      })}
-      <Map
+    <div className="home-flex">
+      <PinMap
+        className="map"
         pins={events
           .map((event) => {
             const nextOccurrence = event.occurrences[0];
@@ -46,12 +26,39 @@ export async function Home() {
                   id: event.id,
                   latitude: nextOccurrence.geosearchResult.latitude,
                   longitude: nextOccurrence.geosearchResult.longitude,
+                  infoWindowContents: nextOccurrence.title,
+                  // TODO: Add global "selected" stage
+                  // TODO: Fix spacing to the right of the info window title
+                  // TODO: Programmatic panning
                 }
               : null;
           })
           .filter((pin) => pin != null)}
       />
-    </>
+      <div className="home-sidebar">
+        <h2>Upcoming open jams</h2>
+        {events.map((event) => {
+          const nextOccurrence = event.occurrences[0];
+          return (
+            <Fragment key={event.id}>
+              <h3>{nextOccurrence.title}</h3>
+              <p>{timeString(nextOccurrence)}</p>
+              {nextOccurrence.geosearchResult && (
+                <p>{nextOccurrence.geosearchResult.neighborhood}</p>
+              )}
+              {nextOccurrence.location && (
+                <p>
+                  <a href={googleMapsURL(nextOccurrence.location)}>
+                    {displayAddress(nextOccurrence.location)}
+                  </a>
+                </p>
+              )}
+              <RichTextDescription unsafeHTML={nextOccurrence.description} />
+            </Fragment>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
