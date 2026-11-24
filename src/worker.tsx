@@ -9,7 +9,7 @@ import { Layout } from "./app/layout";
 
 export default defineApp([
   function cacheHeaderMiddleware({ response }) {
-    response.headers.set("Cache-Control", `max-age=${60 * 15}`);
+    response.headers.set("Cache-Control", `public, max-age=${60 * 15}`);
   },
   render(
     Document,
