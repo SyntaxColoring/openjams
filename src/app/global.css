@@ -86,3 +86,21 @@ body {
   padding-inline: 0.5rem;
   max-width: 30rem;
 }
+
+/*
+ * Hack:
+ * Google Maps's info windows have weird asymmetrical padding
+ * and always reserve space for a scrollbar,
+ * which looks broken with small contents like ours.
+ * This overrides it.
+ */
+.gm-style-iw-d {
+  /* Override Google's hard-coded max-height. We want the container to grow to fit our contents, never have a scrollbar. */
+  max-height: initial !important;
+  /* Override Google's value of `scroll` so we stop reserving space for a scrollbar. */
+  overflow: auto !important;
+}
+.gm-style-iw {
+  /* Override Google's asymmetrical padding. */
+  padding: 0.5rem !important;
+}
