@@ -43,7 +43,7 @@ interface Pin {
   infoWindowContents: ReactNode;
 }
 
-interface PinMapHandle {
+export interface PinMapHandle {
   panTo: (pinID: string) => void;
 }
 
@@ -128,6 +128,8 @@ function HandleConnector(props: Props): ReactNode {
         panTo: (id: string) => {
           const pin = props.pins.find((pin) => pin.id === id);
           if (pin != null) {
+            // TODO: Simultaneous pan and zoom works inconsistently.
+            map?.setZoom(15);
             map?.panTo({ lat: pin.latitude, lng: pin.longitude });
           }
         },

@@ -66,13 +66,17 @@ body {
   min-height: 0;
   overflow: auto;
   /* TODO: For some reason this padding comes out of the map, not the sidebar. */
-  padding-inline: 0.5rem;
+  padding: 0.5rem;
   border-left: 1px solid black;
 }
 
 @media (width <= 800px) {
   .home-flex {
     flex-direction: column;
+  }
+  .home-sidebar {
+    border-left: none;
+    border-top: 1px solid black;
   }
 }
 
