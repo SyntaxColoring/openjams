@@ -8,6 +8,9 @@ import { Calendar } from "./app/pages/calendar";
 import { Layout } from "./app/layout";
 
 export default defineApp([
+  function cacheHeaderMiddleware({ response }) {
+    response.headers.set("Cache-Control", `max-age=${60 * 15}`);
+  },
   render(
     Document,
     layout(Layout, [
