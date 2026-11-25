@@ -5,9 +5,6 @@
   "main": "src/worker.tsx",
   "compatibility_date": "2026-11-15",
   "compatibility_flags": ["nodejs_compat", "temporal"],
-  "assets": {
-    "binding": "ASSETS",
-  },
   "kv_namespaces": [
     {
       "binding": "KV",
