@@ -91,8 +91,19 @@ function Sidebar(props: {
                     type="button"
                     className="link-button"
                     onClick={() => onSelectEvent(event.id)}
-                    onPointerEnter={() => onHoverEvent(event.id)}
-                    onPointerLeave={() => onHoverEvent(null)}
+                    onPointerEnter={(e) => {
+                      // Keep track of hover only with devices that can actually hover
+                      // to avoid triggering confusing browser compatibility behavior.
+                      // https://humanwhocodes.com/blog/2012/07/05/ios-has-a-hover-problem/
+                      if (e.pointerType === "mouse") {
+                        onHoverEvent(event.id);
+                      }
+                    }}
+                    onPointerLeave={(e) => {
+                      if (e.pointerType === "mouse") {
+                        onHoverEvent(null);
+                      }
+                    }}
                   >
                     {event.title}
                   </button>
