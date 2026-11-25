@@ -1,4 +1,5 @@
 import stylesURL from "./global.css?url";
+import faviconURL from "../assets/favicon.svg";
 
 export function Document({ children }: { children: React.ReactNode }) {
   return (
@@ -8,6 +9,7 @@ export function Document({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>NYC Open Jams</title>
         <link rel="stylesheet" href={stylesURL} />
+        <link rel="icon" href={faviconURL} />
         <link rel="modulepreload" href="/src/client.tsx" />
         <script
           // eslint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml -- Trusted and static.
