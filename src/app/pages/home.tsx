@@ -13,7 +13,7 @@ export async function Home() {
           id: event.id,
           title: firstOccurrence.title,
           description: (
-            <RichTextDescription unsafeHTML={firstOccurrence.description} />
+            <RichTextDescription untrustedHTML={firstOccurrence.description} />
           ),
           start: firstOccurrence.start.epochMilliseconds,
           end: firstOccurrence.end.epochMilliseconds,
