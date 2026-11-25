@@ -111,7 +111,12 @@ function MarkerWithInfoWindow(
     <>
       <AdvancedMarker {...markerProps} ref={markerRef} />
       {isOpen && (
-        <InfoWindow disableAutoPan anchor={markerRef.current} headerDisabled>
+        <InfoWindow
+          disableAutoPan
+          shouldFocus={false}
+          anchor={markerRef.current}
+          headerDisabled
+        >
           {children}
         </InfoWindow>
       )}
