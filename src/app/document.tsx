@@ -11,22 +11,17 @@ export function Document({ children }: { children: React.ReactNode }) {
         <link rel="stylesheet" href={stylesURL} />
         <link rel="icon" href={faviconURL} />
         <link rel="modulepreload" href="/src/client.tsx" />
-        <script
-          // eslint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml -- Trusted and static.
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.goatcounter = {
-                path: function (p) {
-                  return location.host + p;
-                },
-              };
-            `,
-          }}
-        />
+
+        <script>
+          {"window.goatcounter = { path: (p) => location.host + p };"}
+        </script>
         <script
           data-goatcounter="https://marrone.goatcounter.com/count"
-          async
           src="https://gc.zgo.at/count.js"
+          // The goatcounter docs recommend loading this script with `async`, not `defer`,
+          // but React mishandles that and hoists this script above the `path` fixup above,
+          // messing up their execution order.
+          defer
         ></script>
       </head>
       <body>
