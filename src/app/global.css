@@ -13,12 +13,27 @@ in a big ol' global.css file. :( https://github.com/redwoodjs/sdk/issues/617
   box-sizing: border-box;
 }
 
-a {
+a,
+.link-button {
   color: cornflowerblue;
 }
-a:hover {
+a:hover,
+.link-button:hover {
   color: white;
   background-color: cornflowerblue;
+}
+
+/* A <button> styled to look like an <a>. */
+.link-button {
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  text-align: inherit;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 html,

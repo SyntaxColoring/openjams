@@ -87,17 +87,15 @@ function Sidebar(props: {
             return (
               <Fragment key={event.id}>
                 <h3>
-                  <a
-                    href=""
-                    onClick={(e) => {
-                      e.preventDefault();
-                      onSelectEvent(event.id);
-                    }}
+                  <button
+                    type="button"
+                    className="link-button"
+                    onClick={() => onSelectEvent(event.id)}
                     onPointerEnter={() => onHoverEvent(event.id)}
                     onPointerLeave={() => onHoverEvent(null)}
                   >
                     {event.title}
-                  </a>
+                  </button>
                 </h3>
                 <p>
                   {timeString(event.start, event.end) +
@@ -111,15 +109,13 @@ function Sidebar(props: {
         </>
       ) : (
         <>
-          <a
-            href=""
-            onClick={(e) => {
-              e.preventDefault();
-              onSelectEvent(null);
-            }}
+          <button
+            type="button"
+            className="link-button"
+            onClick={() => onSelectEvent(null)}
           >
             &lt; all jams
-          </a>
+          </button>
           <h2>{selectedEvent?.title}</h2>
           <p>{timeString(selectedEvent.start, selectedEvent.end)}</p>
           {selectedEvent.description}
