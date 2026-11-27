@@ -2,6 +2,8 @@
 
 This is a site that lists open jams around NYC.
 
+The underlying “dataset” is just a hand-curated Google Calendar. The code here extracts the events and presents them in a friendlier format, including a map, with the help of [NYC GeoSearch](https://geosearch.planninglabs.nyc/).
+
 ## Development commands
 
 - `npm run dev` starts the dev server.
